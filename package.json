@@ -13,8 +13,5 @@
   "dependencies": {
     "express": "^4.17.1"
   }
-  "repository": {
-		"type": "git",
-		"url": "https://github.com/michitatara/Express-NodeJS-Proj"
-  }
+
 }
