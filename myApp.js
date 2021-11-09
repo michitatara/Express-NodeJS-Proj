@@ -3,14 +3,26 @@ var express = require('express');
 var app = express();
 module.exports = app;
 console.log('Hello World');
-app.get("/json", function(req, res) {
+
+let messageObject = {"message": "Hello json"};
+app.get('/json', function(req, res) {
+  if (process.env.MESSAGE_STYLE === 'uppercase') {
+     var u_=JSON.parse(JSON.stringify(messageObject ));
+     u_.message=u_.message.toUpperCase();
+     return res.json(u_);
+  } else {
+      return res.json(messageObject);
+  }
+});
+
+/*app.get("/json", function(req, res) {
 if(process.env.VAR_NAME === "allCaps"){
     response = "Hello json".toUpperCase();
 } else{
     response = "Hello json";
 }
 });
-   /*const response = "Hello json";
+   const response = "Hello json";
    if (process.env.VAR_NAME === "uppercase"){
        res.json({ message: response.toUpperCase() });
    } else{
@@ -18,4 +30,7 @@ if(process.env.VAR_NAME === "allCaps"){
    }
 });*/
 
-app.use("/public",express.static(__dirname + "/public"))
+/*app.use(function middleware(req,res,next){
+
+    next();
+});*/
