@@ -19,8 +19,9 @@ if(process.env.MESAGE_STYLE === "uppercase"){
 app.use(function(req,res,next){
     console.log(req.method + " "+ req.path+ "-" + req.ip);
     next();
-});*/
+});
 
+//time server
 function getTheCurrentTimeString(){
     return new Date().toString();
 }
@@ -29,5 +30,10 @@ app.get("/now", function(req,res,next) {
     next();
 }, function(req,res){
     res.json({time: req.time});
-})
+})*/
+ 
+//get route parameter input from client
+app.get("/:word/echo", function(req,res){
+    res.json({ echo: req.params.word});
+});
 
