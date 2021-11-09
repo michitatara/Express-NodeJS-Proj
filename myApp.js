@@ -9,6 +9,7 @@ if(process.env.VAR_NAME === "allCaps"){
 } else{
     response = "Hello json";
 }
+});
    /*const response = "Hello json";
    if (process.env.VAR_NAME === "uppercase"){
        res.json({ message: response.toUpperCase() });
