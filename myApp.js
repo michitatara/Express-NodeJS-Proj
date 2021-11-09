@@ -56,7 +56,6 @@ app.use(bodyParser.json());
 /*app.post("/name", function(req,res) {
     res.json({name: req.body.first + " " + req.body.last});
 });*/
-app.post('/name', (req, res) => {
-    let name = req.body.first + ' ' + req.body.last;
-    res.json({name: name});
+app.post("/name", (req, res) => {
+    res.json({name: req.body.first + " " + req.body.last});
   });
