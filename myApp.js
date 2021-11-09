@@ -8,7 +8,7 @@ app.get("/json", (req, res) => {
       message: "Hello json"
     });
 });
-if (process.env.VAR_NAME === "uppercase"){
+if (process.env.VAR_NAME === "allCaps"){
     response = "Hello json".toUpperCase();
 } else {
     response = "Hello json";
