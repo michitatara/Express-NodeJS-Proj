@@ -30,7 +30,11 @@ if(process.env.VAR_NAME === "allCaps"){
    }
 });*/
 
-/*app.use(function middleware(req,res,next){
-
+app.use(function middleware(req,res,next){
+    req.time = Date().toString();
+    console.log(req.time);
     next();
-});*/
+},
+function(req,res){
+    res.send({time: req.time})
+});
