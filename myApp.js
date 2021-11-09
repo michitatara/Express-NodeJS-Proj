@@ -1,4 +1,5 @@
 require('dotenv')
+const bodyParser = require('body-parser');
 var express = require('express');
 var app = express();
 module.exports = app;
@@ -35,10 +36,13 @@ app.get("/now", function(req,res,next) {
 //get route parameter input from client
 app.get("/:word/echo", (req,res) => {
     res.json({ echo: req.params.word});
-});*/
+});
 
 //get query parameter input from client
 app.get("/name", (req,res) =>{
     res.json({ name: req.query.first+ " " + req.query.last});
-});
+});*/
 
+//use body-parser to parse post requests
+app.use(bodyParser.urlencoded({ extended: false}));
+app.use(bodyParser.json());
