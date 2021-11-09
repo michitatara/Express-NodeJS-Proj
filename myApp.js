@@ -3,15 +3,13 @@ var express = require('express');
 var app = express();
 module.exports = app;
 console.log('Hello World');
-app.get("/json", (req, res) => {
-    res.json({
-      message: "Hello json"
-    });
+app.get("/json", function(req, res) {
+   const response = "Hello json";
+   if (process.env.MESSAGE_STYLE === "uppercase"){
+       res.json({ message: response.toUpperCase() });
+   } else{
+       res.json({message: response});
+   }
 });
-if (process.env.VAR_NAME === "allCaps"){
-    response = "Hello json".toUpperCase();
-} else {
-    response = "Hello json";
-}
 
 app.use("/public",express.static(__dirname + "/public"))
