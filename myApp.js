@@ -30,10 +30,14 @@ app.get("/now", function(req,res,next) {
     next();
 }, function(req,res){
     res.json({time: req.time});
-})*/
+})
  
 //get route parameter input from client
 app.get("/:word/echo", (req,res) => {
     res.json({ echo: req.params.word});
+});*/
+
+app.get("/name", (req,res) =>{
+    res.json({ name: req.query.first+ " " + req.query.last});
 });
 
