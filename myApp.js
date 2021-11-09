@@ -44,7 +44,6 @@ app.get("/name", (req,res) =>{
 });*/
 
 //use body-parser to parse post requests
-  
 app.use(function(req,res,next){
     console.log(req.method + " "+ req.path+ "-" + req.ip);
     next();
@@ -52,3 +51,8 @@ app.use(function(req,res,next){
 
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use(bodyParser.json());
+
+//get data from post requests
+app.post("/name", function(req,res) {
+    res.json({name: req.body.first + " " + req.body.last});
+});
