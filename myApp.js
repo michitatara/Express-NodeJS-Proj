@@ -4,7 +4,7 @@ var express = require('express');
 var app = express();
 module.exports = app;
 console.log('Hello World');
-
+var bodyParser = require("body-parser");
 /*app.get("/json", function(req, res) {
 if(process.env.MESAGE_STYLE === "uppercase"){
     res.json(
@@ -44,5 +44,11 @@ app.get("/name", (req,res) =>{
 });*/
 
 //use body-parser to parse post requests
+  
+app.use(function(req,res,next){
+    console.log(req.method + " "+ req.path+ "-" + req.ip);
+    next();
+});
+
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use(bodyParser.json());
