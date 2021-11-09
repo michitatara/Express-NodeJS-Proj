@@ -4,8 +4,10 @@ var app = express();
 module.exports = app;
 console.log('Hello World');
 app.get("/json", function(req, res) {
+    
+    
    const response = "Hello json";
-   if (process.env.MESSAGE_STYLE === "uppercase"){
+   if (process.env.VAR_NAME === "uppercase"){
        res.json({ message: response.toUpperCase() });
    } else{
        res.json({message: response});
