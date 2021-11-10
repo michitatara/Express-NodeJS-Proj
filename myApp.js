@@ -38,7 +38,7 @@ app.post("/name", (req,res)=>{
 app.get("/json", (req,res)=>{
   res.json({"message": process.env.MESSAGE_STYLE == "uppercase" ? "HELLO JSON": "Hello json"})
 })
-
+/*
 app.get("/now", (req,res,next) => {
   req.time = new Date().toString();
   next();
@@ -51,4 +51,4 @@ console.log("Hello World");
 
 
 
- module.exports = app; 
+ module.exports = app; */
