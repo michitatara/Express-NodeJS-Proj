@@ -1,60 +1,54 @@
-require('dotenv')
-const bodyParser = require('body-parser');
 var express = require('express');
+let bodyParser = require("body-parser");
 var app = express();
-module.exports = app;
-console.log('Hello World');
-var bodyParser = require("body-parser");
-/*app.get("/json", function(req, res) {
-if(process.env.MESAGE_STYLE === "uppercase"){
-    res.json(
-        {"message":"HELLO JSON"}       
-    )
-} else{
-    res.json(
-        {"message": "Hello json"}
-    )
-}
-});
-  
-app.use(function(req,res,next){
-    console.log(req.method + " "+ req.path+ "-" + req.ip);
-    next();
-});
+let absolutePath = __dirname + "/views/index.html";
 
-//time server
-function getTheCurrentTimeString(){
-    return new Date().toString();
-}
-app.get("/now", function(req,res,next) {
-    req.time = getTheCurrentTimeString();
-    next();
-}, function(req,res){
-    res.json({time: req.time});
+app.use(bodyParser.urlencoded({extended: false}))
+app.use("/public", express.static(__dirname +"/public"));
+
+app.use((req,res,next) => {
+  let {method,path,ip} = req;
+  console.log(req.method +" " + req.path + " - " + req.ip)
+  next();
+})
+//app.get("/", (req,res)=>{
+//res.send("Hello Express")
+//})
+
+app.get("/", (req,res)=>{
+  res.sendFile(absolutePath)
+})
+
+
+
+app.get("/:word/echo", (req,res)=>{
+  res.json({echo: req.params.word})
+})
+
+app.get("/name",(req,res)=>{
+  res.json({name:req.query.first + " " + req.query.last})
+})
+
+app.post("/name", (req,res)=>{
+
+  res.json({name: req.body.first + " " + req.body.last})
+  console.log(req.body);
 })
  
-//get route parameter input from client
-app.get("/:word/echo", (req,res) => {
-    res.json({ echo: req.params.word});
-});
+app.get("/json", (req,res)=>{
+  res.json({"message": process.env.MESSAGE_STYLE == "uppercase" ? "HELLO JSON": "Hello json"})
+})
 
-//get query parameter input from client
-app.get("/name", (req,res) =>{
-    res.json({ name: req.query.first+ " " + req.query.last});
-});*/
+app.get("/now", (req,res,next) => {
+  req.time = new Date().toString();
+  next();
+}, (req,res) => {
+  res.json({time: req.time});
 
-//use body-parser to parse post requests
-app.use(function(req,res,next){
-    console.log(req.method + " "+ req.path+ "-" + req.ip);
-    next();
-});
+})
 
-app.use(bodyParser.urlencoded({ extended: false}));
-app.use(bodyParser.json());
+console.log("Hello World");
 
-//get data from post requests
-app.post("/name", function(req, res) {
-    // Handle the data in the request
-    var string = req.body.first + " " + req.body.last;
-    res.json({ name: string });
-  });
+
+
+ module.exports = app; 
